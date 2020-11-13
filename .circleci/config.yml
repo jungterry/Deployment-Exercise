@@ -4,10 +4,10 @@ version: 2.1
 jobs:
     create_infrastructure:
         docker:
-          - image: amazon/aws-cli
+            - image: amazon/aws-cli
         steps:
-          - checkout
-          - run:
+            - checkout
+            - run:
                 name: Ensure backend infrastructure exist
                 command: |
                     aws cloudformation deploy \
@@ -17,4 +17,4 @@ jobs:
 workflows:
     deployment_workflow:
         jobs:
-          - create_infrastructure
+            - create_infrastructure
