@@ -36,6 +36,9 @@ jobs:
         steps:
             - checkout
             - run:
+                name: Install curl
+                command: apk add --update curl
+            - run:
                 name: Smoke test
                 command: |
                     if curl -s --head "https://google.com"
