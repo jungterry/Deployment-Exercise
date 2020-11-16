@@ -30,8 +30,24 @@ jobs:
                 command: |
                     ansible-playbook main-remote.yml -i inventory
 
+    smoke_test:
+        docker:
+            - image: alpine:latest
+        steps:
+            - checkout
+            - run:
+                name: Smoke test
+                command: |
+                    if curl -s --head "https://google.com"
+                    then
+                        return 0
+                    else
+                        return 1
+                    fi
+
 workflows:
     deployment_workflow:
         jobs:
             # - create_infrastructure
             # - configure_infrastructure
+            - smoke_test
