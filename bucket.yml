@@ -3,6 +3,7 @@ Parameters:
     Type: String
 
 Resources:
+
   WebsiteBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -11,6 +12,7 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: 404.html
+
   WebsiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
