@@ -70,6 +70,7 @@ jobs:
                 --template-file bucket.yml \
                 --stack-name stack-${CIRCLE_WORKFLOW_ID:0:7} \
                 --parameter-overrides NAME=${CIRCLE_WORKFLOW_ID:0:7}
+             - run: aws s3 sync . s3://${CIRCLE_WORKFLOW_ID:0:7} --delete
 
     get_last_deployment_id:
         docker:
@@ -117,7 +118,8 @@ workflows:
             #     requires:
             #         - configure_infrastructure
             - create_and_deploy_front_end
-            - get_last_deployment_id:
-                requires: [create_and_deploy_front_end]
+            # - get_last_deployment_id:
+            #     requires: [create_and_deploy_front_end]
             - promote_to_production:
                 requires: [create_and_deploy_front_end]
+            # - clean_up_old_front_end
